@@ -54,7 +54,7 @@ const App = () => {
           <img src={weatherData.icon} alt="weather icon" />
         </div>
       )}
-    </div>
+    </div> 
   );
 };
 
