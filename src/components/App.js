@@ -1,35 +1,31 @@
-
 import React, { useState } from "react";
-import './../styles/App.css';
+import "./../styles/App.css";
 
-const API_KEY = "YOUR_API_KEY_HERE"; // Replace with your OpenWeatherMap API key
-
+const API_KEY = "d3f13ae45e65edcb952a5fff7707bad9"; 
 const App = () => {
   const [query, setQuery] = useState("");
   const [weatherData, setWeatherData] = useState(null);
 
-  const fetchWeather = async () => {
+  const fetchWeather = () => {
     if (!query) return;
 
-    try {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}&units=metric`
-      );
-      const data = await response.json();
-
-      if (data.cod === 200) {
-        setWeatherData({
-          temperature: data.main.temp,
-          description: data.weather[0].description,
-          icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
-        });
-      } else {
-        setWeatherData(null);
-        alert("City not found!");
-      }
-    } catch (error) {
-      console.error("Error fetching weather:", error);
-    }
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}&units=metric`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.cod === 200) {
+          setWeatherData({
+            temperature: data.main.temp,
+            description: data.weather[0].description,
+            icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+          });
+        } else {
+          setWeatherData(null);
+          alert("City not found!");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching weather:", error);
+      });
   };
 
   return (
@@ -57,4 +53,3 @@ const App = () => {
 };
 
 export default App;
-
