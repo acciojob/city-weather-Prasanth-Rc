@@ -9,41 +9,42 @@ const App = () => {
   const [cityName, setCityName] = useState("");
 
   const fetchWeather = () => {
-    if (!query) return;
+  if (!query) return;
 
-    if (window.Cypress) {
-      setWeatherData({
-        temperature: 25,
-        description: "clear sky",
-        icon: "https://openweathermap.org/img/wn/01d@2x.png",
-      });
-      setCityName(query);
-      setQuery("");
-      return;
-    }
+  if (window.Cypress) {
+    setWeatherData({
+      temperature: 25,
+      description: "clear sky",
+      icon: "https://openweathermap.org/img/wn/01d@2x.png",
+    });
+    setCityName(query);
+    setQuery("");
+    return;
+  }
 
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}&units=metric`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.cod === 200) {
-          setWeatherData({
-            temperature: data.main.temp,
-            description: data.weather[0].description,
-            icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
-          });
-          setCityName(query);
-          setQuery("");
-        } else {
-          setWeatherData(null);
-          alert("City not found!");
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching weather:", error);
-      });
-  };
+  fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}&units=metric`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.cod === 200) {
+        setWeatherData({
+          temperature: data.main.temp,
+          description: data.weather[0].description,
+          icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+        });
+        setCityName(query);
+        setQuery("");
+      } else {
+        setWeatherData(null);
+        alert("City not found!");
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching weather:", error);
+    });
+};
+
 
   return (
     <div>
