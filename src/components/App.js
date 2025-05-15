@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "./../styles/App.css";
 
-const API_KEY = "d3f13ae45e65edcb952a5fff7707bad9";
+const API_KEY = "d3f13ae45e65edcb952a5fff7707bad9"; 
 
 const App = () => {
   const [query, setQuery] = useState("");
   const [weatherData, setWeatherData] = useState(null);
-  const [cityName, setCityName] = useState(""); // 🔄 Track original city name separately
+  const [cityName, setCityName] = useState("");
 
   const fetchWeather = () => {
     if (!query) return;
@@ -22,8 +22,8 @@ const App = () => {
             description: data.weather[0].description,
             icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
           });
-          setCityName(data.name); // ✅ Use actual city name from API
-          setQuery(""); // ✅ Clear input
+          setCityName(query);
+          setQuery("");
         } else {
           setWeatherData(null);
           alert("City not found!");
@@ -48,13 +48,13 @@ const App = () => {
 
       {weatherData && (
         <div className="weather">
-          <h2>{cityName}</h2>
+          <h2>{cityName || "City"}</h2>
           <p>Temperature: {weatherData.temperature}°C</p>
           <p>{weatherData.description}</p>
           <img src={weatherData.icon} alt="weather icon" />
         </div>
       )}
-    </div> 
+    </div>
   );
 };
 
