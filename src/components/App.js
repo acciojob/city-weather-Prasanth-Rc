@@ -9,7 +9,9 @@ const App = () => {
   const fetchWeather = () => {
     if (!query) return;
 
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}&units=metric`)
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}&units=metric`
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.cod === 200) {
@@ -18,6 +20,7 @@ const App = () => {
             description: data.weather[0].description,
             icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
           });
+          setQuery(""); // ✅ clear input field after successful fetch
         } else {
           setWeatherData(null);
           alert("City not found!");
@@ -42,7 +45,7 @@ const App = () => {
 
       {weatherData && (
         <div className="weather">
-          <h2>{query}</h2>
+          <h2>{query || "City"}</h2>
           <p>Temperature: {weatherData.temperature}°C</p>
           <p>{weatherData.description}</p>
           <img src={weatherData.icon} alt="weather icon" />
