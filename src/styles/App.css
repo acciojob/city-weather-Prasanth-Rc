@@ -1,14 +1,36 @@
+.weather-app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.search-container {
+  margin-bottom: 20px;
+}
 
 .search {
-  padding: 8px;
-  margin: 10px;
-  width: 200px;
+  padding: 10px;
+  width: 70%;
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .weather {
   margin-top: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  display: inline-block;
-  text-align: center;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.weather img {
+  width: 100px;
+  height: 100px;
 }
