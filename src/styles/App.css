@@ -1,1 +1,14 @@
 
+.search {
+  padding: 8px;
+  margin: 10px;
+  width: 200px;
+}
+
+.weather {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  text-align: center;
+}
